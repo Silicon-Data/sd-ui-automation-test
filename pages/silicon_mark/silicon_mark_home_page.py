@@ -1,19 +1,19 @@
+import time
+from time import sleep
+
 import pytest
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException, WebDriverException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException, WebDriverException
 from pages.base_page import BasePage
+from util.util import dump_all_elements
 
 
 class SiliconMarkHomePage(BasePage):
-    MARK_TAB = (By.XPATH, '//a[@href="/silicon-mark" and .//div[contains(., "SiliconMark")]]')
-    BENCHMARK_PLAN_SEARCH_BOX = (By.XPATH, '/html/body/div[2]/div[3]/main/div/div[2]/div/button')
-    JOB_NAME_SEARCH_BOX = (By.XPATH, '/html/body/div[2]/div[3]/main/div/div[2]/div/div/input')
-    CREATE_JOB_BUTTON = (By.XPATH, '/html/body/div[2]/div[3]/main/div/div[4]/button')
-
-    # DROPDOWN_TRIGGER_LOCATOR = (
-    #     By.XPATH,
-    #     '//button[contains(@class, "flex h-10 items-center justify-between rounded-md") and .//span[text()="Please select the benchmark test"]]'
-    # )
+    MARK_TAB = (By.XPATH, "(//a)[10]")
+    BENCHMARK_PLAN_SEARCH_BOX = (
+        By.XPATH, '//button[@data-sentry-element="SelectTrigger" and .//span[contains(., "Please select the benchmark test")]]')
+    JOB_NAME_SEARCH_BOX = (By.XPATH, "//input[@placeholder='Please search job name']")
+    CREATE_JOB_BUTTON = (By.XPATH, "//button[normalize-space()='Create Job']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -39,6 +39,8 @@ class SiliconMarkHomePage(BasePage):
             pytest.fail(f"Failed to navigate to silicon-mark unknown error: {str(e)}")
 
     def silicon_mark_elements_exist(self):
+        print(f"===========>{self.driver.current_url}================")
+        time.sleep(3)
         try:
             self.driver.find_element(*self.BENCHMARK_PLAN_SEARCH_BOX)
             self.driver.find_element(*self.JOB_NAME_SEARCH_BOX)

@@ -28,4 +28,4 @@ def test_silicon_mark_page_elements_exist(driver):
     sleep(2)
     print(f"==----------------=>{driver.current_url}")
     silicon_mark_page.navigate_to_silicon_mark()
-    # silicon_mark_page.silicon_mark_elements_exist()
+    silicon_mark_page.silicon_mark_elements_exist()
