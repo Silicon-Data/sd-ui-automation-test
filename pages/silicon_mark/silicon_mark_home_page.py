@@ -1,6 +1,6 @@
 import pytest
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException, WebDriverException
+from selenium.common.exceptions import TimeoutException, WebDriverException, NoSuchElementException
 from pages.base_page import BasePage
 
 
@@ -37,5 +37,11 @@ class SiliconMarkHomePage(BasePage):
             pytest.fail(f"Time out or webdriver error, {str(e)}")
         except Exception as e:
             pytest.fail(f"Failed to navigate to silicon-mark unknown error: {str(e)}")
-    
 
+    def silicon_mark_elements_exist(self):
+        try:
+            self.driver.find_element(*self.BENCHMARK_PLAN_SEARCH_BOX)
+            self.driver.find_element(*self.JOB_NAME_SEARCH_BOX)
+            self.driver.find_element(*self.CREATE_JOB_BUTTON)
+        except Exception as e:
+            pytest.fail(f"Failed to locate silicon mark elements, error {str(e)}")
