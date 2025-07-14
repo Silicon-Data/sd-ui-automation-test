@@ -15,6 +15,7 @@ class HomePage(BasePage):
 
     def navigate_to_login(self) -> LoginPage:
         login_page_url = "https://www.silicondata.com/signin"
+        print(f"current page is {self.driver.current_url}")
         try:
             self.driver.find_element(*self.LOGIN_BUTTON)
             self.driver.execute_script("""
