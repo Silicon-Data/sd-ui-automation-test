@@ -8,7 +8,6 @@ from pages.home_page import HomePage
 from pages.silicon_mark.silicon_mark_home_page import SiliconMarkHomePage
 
 
-@pytest.mark.order(1)
 def test_successful_login(driver):
     driver.get("https://www.silicondata.com")
 
@@ -18,7 +17,7 @@ def test_successful_login(driver):
     is_login, login_message = login_page_object.enter_credentials_and_direct_navigator("frank+protest_internal@silicondata.com", "qqq111!!")
     assert is_login, login_message
 
-@pytest.mark.order(2)
+# @pytest.mark.order(2)
 def test_silicon_mark_page_elements_exist(driver):
     window_size = driver.get_window_size()
     print(window_size)
@@ -29,3 +28,4 @@ def test_silicon_mark_page_elements_exist(driver):
     print(f"==----------------=>{driver.current_url}")
     silicon_mark_page.navigate_to_silicon_mark()
     silicon_mark_page.silicon_mark_elements_exist()
+
